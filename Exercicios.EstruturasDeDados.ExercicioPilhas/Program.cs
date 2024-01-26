@@ -18,7 +18,7 @@
         {
             var pilha = new Stack<char>();
 
-            var openingChars = new char[]{ '[', '{', '(' };
+            var openingChars = new char[] { '[', '{', '(' };
             var closingChars = new char[] { ']', '}', ')' };
 
             foreach (var caracter in expression)
@@ -29,7 +29,8 @@
                 }
                 else if (ArrayContains(closingChars, caracter))
                 {
-                    if (pilha.Count == 0 || !OpeningClosingMatches(openingChars, pilha.Pop(), closingChars, caracter)){
+                    if (pilha.Count == 0 || !OpeningClosingMatches(openingChars, pilha.Pop(), closingChars, caracter))
+                    {
                         return false;
                     }
                 }
@@ -40,9 +41,9 @@
 
         private static bool ArrayContains(char[] chars, char caracter)
         {
-            foreach (var c in chars) 
+            foreach (var c in chars)
             {
-                if (c == caracter) 
+                if (c == caracter)
                     return true;
             }
 
