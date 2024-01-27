@@ -15,20 +15,22 @@
 
         public static void BatataQuente(int numeroJogadores)
         {
-            //int numeroAleatorio = new Random().Next(1, 101);
-            int numeroAleatorio = 5;
+            int numeroAleatorio = new Random().Next(1, 101);
             var fila = new Queue<string>(numeroJogadores);
 
             for (int i = 1; i <= numeroJogadores; i++)
             {
                 fila.Enqueue(i.ToString());
             }
+            // Adicionei algum texto para que todo a execução pudesse ser verificada no console
+            Console.WriteLine("JOGO INICIADO.\n\n Jogadores: {0}\n A batata vai explodir após: {1} rodada(s)", fila.Count, numeroAleatorio);
 
             string pessoaComBatata;
 
             for (int i = 0; i < numeroAleatorio; i++)
             {
                 pessoaComBatata = fila.Dequeue();
+                Console.WriteLine("Passando pelo Jogador {0}", pessoaComBatata);
                 fila.Enqueue(pessoaComBatata);
             }
 
