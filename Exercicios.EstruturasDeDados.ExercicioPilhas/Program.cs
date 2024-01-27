@@ -16,20 +16,26 @@
         */
         public static bool IsBalanceada(string expression)
         {
-            var pilha = new Stack<char>();
+            var stack = new Stack<char>();
 
-            var openingChars = new char[] { '[', '{', '(' };
-            var closingChars = new char[] { ']', '}', ')' };
+            // A estrutura de dados ideal para esse tipo de comparação seria mesmo o dicionário, pois assim você não precisaria
+            // ficar escaneando o array repetidamente, mas conhecendo a chave, já cegaria diretamente ao valor
+            var matchingChars = new Dictionary<char, char> {
+                { '[', ']' },
+                { '{', '}' },
+                { '(', ')' }
+            };
 
             foreach (var caracter in expression)
             {
-                if (ArrayContains(openingChars, caracter))
+                if (matchingChars.ContainsKey(caracter))
                 {
-                    pilha.Push(caracter);
+                    stack.Push(caracter);
                 }
-                else if (ArrayContains(closingChars, caracter))
+                else if (matchingChars.ContainsValue(caracter))
                 {
-                    if (pilha.Count == 0 || !OpeningClosingMatches(openingChars, pilha.Pop(), closingChars, caracter))
+                    // Aqui você também poderia resolver com um switch, mas usar o dicionário torna o código mais simples:
+                    if (stack.Count == 0 || matchingChars[stack.Pop()] != caracter)
                     {
                         return false;
                     }
@@ -37,22 +43,6 @@
             }
 
             return true;
-        }
-
-        private static bool ArrayContains(char[] chars, char caracter)
-        {
-            foreach (var c in chars)
-            {
-                if (c == caracter)
-                    return true;
-            }
-
-            return false;
-        }
-
-        private static bool OpeningClosingMatches(char[] openingChars, char openingChar, char[] closingChars, char closingChar)
-        {
-            return Array.IndexOf(openingChars, openingChar) == Array.IndexOf(closingChars, closingChar);
         }
     }
 }

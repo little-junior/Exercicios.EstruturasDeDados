@@ -24,6 +24,7 @@ namespace Exercicios.EstruturasDeDados.ExercicioDicionarios
 
             string pattern = "[;.,:?!/'\"]";
 
+            // Ótimo caso para aplicar Regex!
             string textFormated = Regex.Replace(text, pattern, "");
 
             var textSplited = textFormated.Split(" ");
